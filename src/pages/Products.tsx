@@ -9,14 +9,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { IProduct } from '@/types/globalTypes';
 
 export default function Products() {
-  // const [data, setData] = useState<IProduct[]>([]);
-  // useEffect(() => {
-  //   fetch('./data.json')
-  //     .then((res) => res.json())
-  //     .then((data) => setData(data));
-  // }, []);
-
-  const {data, isLoading} = useGetProductsQuery(undefined);
+  const {data, isLoading, error} = useGetProductsQuery(undefined);
 
   const { toast } = useToast();
 const {priceRange, status} = useAppSelector(state => state.product)

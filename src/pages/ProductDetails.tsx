@@ -1,24 +1,14 @@
 import ProductReview from '@/components/ProductReview';
 import { Button } from '@/components/ui/button';
+import { useSingleProductQuery } from '@/redux/api/apiSlice';
 import { IProduct } from '@/types/globalTypes';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 export default function ProductDetails() {
   const { id } = useParams();
-
-  //! Temporary code, should be replaced with redux
-  const [data, setData] = useState<IProduct[]>([]);
-  useEffect(() => {
-    fetch('../../public/data.json')
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
-
-  const product = data?.find((item) => item._id === Number(id));
-
-  //! Temporary code ends here
-
+  
+  const {data: product, isLoading, erroe} = useSingleProductQuery(id);
   return (
     <>
       <div className="flex max-w-7xl mx-auto items-center border-b border-gray-300">
